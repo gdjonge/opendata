@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaarverslag Accountantskamer 2025 — Uitgebreide Analyse</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#f0f2f5;color:#0f172a;line-height:1.6}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#0c1220 0%,#162032 40%,#1a365d 100%);color:#fff;padding:52px 28px 44px;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 10% 90%,rgba(220,38,38,.2) 0%,transparent 50%),radial-gradient(ellipse at 90% 10%,rgba(37,99,235,.12) 0%,transparent 50%)}
+.hdr-in{position:relative;max-width:1200px;margin:0 auto}
+.hdr-badge{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:4px;color:#64748b;border:1px solid rgba(100,116,139,.4);padding:4px 14px;border-radius:20px;margin-bottom:14px}
+.hdr h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5.5vw,52px);font-weight:800;line-height:1.08;margin-bottom:12px}
+.hdr h1 span{color:#f87171}
+.hdr p{font-size:16px;color:#94a3b8;max-width:620px}
+
+/* NAV */
+.nw{max-width:1200px;margin:-22px auto 0;padding:0 20px;position:relative;z-index:2}
+.nv{display:flex;gap:1px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nv button{padding:12px 24px;border:none;border-radius:8px 8px 0 0;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;background:#1e293b;color:#94a3b8;transition:.2s;white-space:nowrap;border-top:2px solid transparent}
+.nv button:hover{background:#334155;color:#f1f5f9}
+.nv button.on{background:#fff;color:#dc2626;border-top:2px solid #dc2626;box-shadow:0 -2px 8px rgba(0,0,0,.08)}
+
+/* CONTENT */
+.cw{max-width:1200px;margin:0 auto;padding:0 20px 48px}
+.ct{background:#fff;border-radius:0 8px 8px 8px;padding:32px;box-shadow:0 6px 28px rgba(0,0,0,.06)}
+.tp{display:none}.tp.on{display:block}
+
+/* STATS */
+.sg{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+.sc{background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:12px;padding:22px 24px;color:#fff;flex:1 1 170px;min-width:155px;position:relative;overflow:hidden;cursor:pointer;transition:transform .15s,box-shadow .15s;border:1px solid transparent}
+.sc:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15)}
+.sc::after{content:'';position:absolute;top:-25px;right:-25px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.03)}
+.sl{font-size:10px;text-transform:uppercase;letter-spacing:1.8px;color:#94a3b8;margin-bottom:6px}
+.sv{font-family:'Playfair Display',serif;font-size:40px;font-weight:800;line-height:1;color:#f1f5f9}
+.ss{font-size:11px;color:#64748b;margin-top:5px}
+
+/* SECTION TITLE */
+.st{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#0f172a;margin:44px 0 20px;padding-bottom:8px;border-bottom:3px solid #dc2626;display:inline-block}
+
+/* CHART */
+.cb{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin-bottom:24px;position:relative}
+.cr{display:flex;gap:20px;flex-wrap:wrap}.cr>div{flex:1 1 320px}
+
+/* DRILLDOWN OVERLAY */
+.dd-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;backdrop-filter:blur(3px);justify-content:center;align-items:center}
+.dd-overlay.show{display:flex}
+.dd-box{background:#fff;border-radius:14px;padding:32px;max-width:800px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);position:relative}
+.dd-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#64748b;padding:4px 8px;border-radius:4px}
+.dd-close:hover{background:#f1f5f9;color:#0f172a}
+.dd-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:16px;padding-right:36px}
+
+/* CARDS */
+.ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:8px}
+.ic{border-radius:10px;padding:20px;border:1px solid;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.ic:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.ic h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:6px}
+.ic p{font-size:12px;color:#475569;line-height:1.6}
+.ic.red{background:#fef2f2;border-color:#fecaca}.ic.red h3{color:#dc2626}
+.ic.blue{background:#eff6ff;border-color:#bfdbfe}.ic.blue h3{color:#2563eb}
+.ic.green{background:#f0fdf4;border-color:#bbf7d0}.ic.green h3{color:#16a34a}
+.ic.purple{background:#faf5ff;border-color:#e9d8fd}.ic.purple h3{color:#7c3aed}
+.ic.amber{background:#fffbeb;border-color:#fde68a}.ic.amber h3{color:#d97706}
+.ic.teal{background:#f0fdfa;border-color:#99f6e4}.ic.teal h3{color:#0d9488}
+
+/* TABLE */
+.tw{overflow-x:auto;max-height:600px;overflow-y:auto;border-radius:8px;border:1px solid #e2e8f0}
+table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap}
+thead{position:sticky;top:0;z-index:1}
+thead tr{background:#0f172a;color:#fff}
+th{padding:10px 12px;text-align:left;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+th.so{cursor:pointer;user-select:none}th.so:hover{background:#1e293b}
+td{padding:8px 12px;border-bottom:1px solid #f1f5f9}
+tbody tr:nth-child(even){background:#f8fafc}
+tbody tr:hover{background:#eff6ff}
+tbody tr.clickable{cursor:pointer}
+
+/* BADGES */
+.b{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;white-space:nowrap}
+.b-gg{background:#dcfce7;color:#166534}.b-dg{background:#fef9c3;color:#854d0e}
+.b-og{background:#fee2e2;color:#dc2626}.b-no{background:#f3e8ff;color:#6b21a8}
+.b-ko{background:#ffedd5;color:#c2410c}.b-ov{background:#e2e8f0;color:#475569}
+.b-ra{background:#dbeafe;color:#1d4ed8}.b-aa{background:#fef9c3;color:#a16207}
+.b-m{background:#fecaca;color:#991b1b;font-size:11px}
+
+/* SEARCH */
+.search-bar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.search-bar input,.search-bar select{padding:9px 14px;border:1px solid #e2e8f0;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;background:#f8fafc;outline:none;transition:border-color .2s}
+.search-bar input:focus,.search-bar select:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.search-bar input{flex:1;min-width:200px}
+.search-bar select{min-width:150px}
+.search-bar .reset{padding:9px 16px;background:#1e293b;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px}
+.search-bar .reset:hover{background:#334155}
+
+/* COUNTER */
+.counter{font-size:12px;color:#64748b;margin-bottom:12px}
+
+/* RANKING LIST */
+.rank-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.rank-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:all .15s}
+.rank-item:hover{background:#eff6ff;border-color:#bfdbfe;transform:translateY(-1px)}
+.rank-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#dc2626;min-width:36px}
+.rank-info{flex:1}
+.rank-name{font-weight:600;font-size:13px;color:#1e293b}
+.rank-sub{font-size:11px;color:#64748b}
+.rank-bar{height:4px;background:#e2e8f0;border-radius:2px;margin-top:4px;overflow:hidden}
+.rank-bar-fill{height:100%;border-radius:2px;transition:width .5s}
+
+/* FOOTER */
+.ft{text-align:center;padding:28px 0 48px;color:#94a3b8;font-size:11px}
+.ft a{color:#64748b}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:28px}
+.tl::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e2e8f0}
+.tl-item{position:relative;margin-bottom:18px;padding:12px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;transition:all .15s}
+.tl-item:hover{background:#eff6ff;border-color:#bfdbfe}
+.tl-item::before{content:'';position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;border:2px solid #dc2626;background:#fff}
+.tl-date{font-size:11px;color:#64748b;font-weight:600}
+.tl-desc{font-size:12px;color:#1e293b;margin-top:2px}
+
+@media(max-width:680px){.hdr{padding:32px 16px 28px}.ct{padding:16px}.sc{min-width:130px;padding:16px}.sv{font-size:30px}.cr>div{flex:1 1 100%}}
+</style>
+</head>
+<body>
+
+<div class="hdr"><div class="hdr-in">
+  <span class="hdr-badge">Accountantskamer Zwolle</span>
+  <h1>Jaarverslag <span>2025</span></h1>
+  <p>Uitgebreide analyse van alle 75 tuchtrechtelijke uitspraken — met drilldown, advocaten, rechters en kamersamenstelling</p>
+</div></div>
+
+<div class="nw"><div class="nv" id="navBtns">
+  <button class="on" onclick="showTab('dashboard',this)">Dashboard</button>
+  <button onclick="showTab('maatregelen',this)">Maatregelen</button>
+  <button onclick="showTab('onderwerpen',this)">Onderwerpen</button>
+  <button onclick="showTab('personen',this)">Personen</button>
+  <button onclick="showTab('kamer',this)">Kamersamenstelling</button>
+  <button onclick="showTab('database',this)">Database</button>
+</div></div>
+
+<!-- DRILLDOWN OVERLAY -->
+<div class="dd-overlay" id="ddOverlay" onclick="if(event.target===this)closeDrill()">
+  <div class="dd-box">
+    <button class="dd-close" onclick="closeDrill()">&times;</button>
+    <div id="ddContent"></div>
+  </div>
+</div>
+
+<div class="cw"><div class="ct">
+
+<!-- TAB: DASHBOARD -->
+<div id="tab-dashboard" class="tp on">
+  <div class="sg" id="statsRow1"></div>
+  <div class="sg" id="statsRow2"></div>
+  <h2 class="st">Uitspraken per maand <span style="font-size:12px;color:#64748b;font-weight:400">(klik op een staaf voor details)</span></h2>
+  <div class="cb"><div style="height:180px"><canvas id="cMaand"></canvas></div></div>
+  <div class="cr">
+    <div><h2 class="st">Beslissingen</h2><div class="cb"><div style="height:200px"><canvas id="cBesl"></canvas></div></div></div>
+    <div><h2 class="st">RA vs AA</h2><div class="cb"><div style="height:200px"><canvas id="cType"></canvas></div></div></div>
+  </div>
+  <h2 class="st">Voorzitters</h2>
+  <div id="vzRow" class="cr" style="gap:16px"></div>
+  <h2 class="st">Tijdlijn — Opvallende zaken</h2>
+  <div class="tl" id="timeline"></div>
+</div>
+
+<!-- TAB: MAATREGELEN -->
+<div id="tab-maatregelen" class="tp">
+  <h2 class="st">Maatregelen <span style="font-size:12px;color:#64748b;font-weight:400">(klik voor drilldown)</span></h2>
+  <div class="cb"><div style="height:120px"><canvas id="cMaat"></canvas></div></div>
+  <div class="cr">
+    <div><h2 class="st">Duur doorhalingen</h2><div class="cb"><div style="height:160px"><canvas id="cDuur"></canvas></div></div></div>
+    <div><h2 class="st">Maatregelen per kwartaal</h2><div class="cb"><div style="height:160px"><canvas id="cKwart"></canvas></div></div></div>
+  </div>
+  <h2 class="st">Top 10 zwaarste sancties</h2>
+  <div class="tw" id="tblZwaar"></div>
+</div>
+
+<!-- TAB: ONDERWERPEN -->
+<div id="tab-onderwerpen" class="tp">
+  <h2 class="st">Klachtcategorieën <span style="font-size:12px;color:#64748b;font-weight:400">(klik voor drilldown)</span></h2>
+  <div class="cb"><div style="height:150px"><canvas id="cOnd"></canvas></div></div>
+  <h2 class="st">Type klager</h2>
+  <div class="cr" style="gap:16px">
+    <div class="cb" style="flex:1"><div style="height:180px"><canvas id="cKlager"></canvas></div></div>
+    <div style="flex:1" id="klagerDetails"></div>
+  </div>
+  <h2 class="st">Geschonden fundamentele beginselen <span style="font-size:12px;color:#64748b;font-weight:400">(VGBA art. 2 — klik voor drilldown)</span></h2>
+  <div class="cr">
+    <div><div class="cb"><div style="height:160px"><canvas id="cBG"></canvas></div></div></div>
+    <div id="bgDetails"></div>
+  </div>
+
+  <h2 class="st">Thematische analyse</h2>
+  <div class="ig" id="themaCards"></div>
+</div>
+
+<!-- TAB: PERSONEN -->
+<div id="tab-personen" class="tp">
+  <h2 class="st">Advocaten van betrokkenen <span style="font-size:12px;color:#64748b;font-weight:400">(klik voor zaken)</span></h2>
+  <div class="rank-list" id="advBetrokken"></div>
+  <h2 class="st">Advocaten/gemachtigden van klagers</h2>
+  <div class="rank-list" id="advKlager"></div>
+  <h2 class="st">Secretarissen</h2>
+  <div class="rank-list" id="secretarissen"></div>
+</div>
+
+<!-- TAB: KAMER -->
+<div id="tab-kamer" class="tp">
+  <h2 class="st">Kamersamenstelling</h2>
+  <p style="color:#475569;font-size:13px;margin-bottom:20px">De Accountantskamer behandelt zaken in een <strong>grote kamer</strong> (5 leden: voorzitter + 2 rechterlijke leden + 2 accountantsleden), een <strong>kleine kamer</strong> (3 leden: voorzitter + 1 rechterlijk lid + 1 accountantslid), of via een <strong>voorzittersbeslissing</strong> (alleen de voorzitter).</p>
+  <div class="cr">
+    <div><div class="cb"><div style="height:180px"><canvas id="cKamer"></canvas></div></div></div>
+    <div id="kamerStats" style="display:flex;flex-direction:column;gap:12px"></div>
+  </div>
+  <h2 class="st">Rechterlijke leden <span style="font-size:12px;color:#64748b;font-weight:400">(klik voor zaken)</span></h2>
+  <div class="rank-list" id="rechters"></div>
+  <h2 class="st">Accountantsleden</h2>
+  <div class="rank-list" id="accLeden"></div>
+</div>
+
+<!-- TAB: DATABASE -->
+<div id="tab-database" class="tp">
+  <h2 class="st">Volledige database</h2>
+  <div class="search-bar">
+    <input type="text" id="dbSearch" placeholder="Zoek op onderwerp, advocaat, rechter..." oninput="renderDB()">
+    <select id="dbFilter" onchange="renderDB()">
+      <option value="">Alle beslissingen</option>
+      <option value="Gegrond">Gegrond</option>
+      <option value="Deels gegrond">Deels gegrond</option>
+      <option value="Ongegrond">Ongegrond</option>
+      <option value="Niet-ontvankelijk">Niet-ontvankelijk</option>
+      <option value="Kennelijk">Kennelijk ongegrond</option>
+    </select>
+    <select id="dbKlager" onchange="renderDB()">
+      <option value="">Alle klagers</option>
+      <option value="NBA">NBA</option>
+      <option value="Particulier">Particulier</option>
+      <option value="Curator">Curator</option>
+    </select>
+    <button class="reset" onclick="document.getElementById('dbSearch').value='';document.getElementById('dbFilter').value='';document.getElementById('dbKlager').value='';renderDB()">Reset</button>
+  </div>
+  <div class="counter" id="dbCounter"></div>
+  <div class="tw" id="tblDB"></div>
+</div>
+
+</div>
+
+<div class="ft">
+  <p>Jaarverslag Accountantskamer 2025 — Uitgebreide analyse op basis van 75 gepubliceerde uitspraken</p>
+  <p>Bron: <a href="https://tuchtrecht.overheid.nl" target="_blank">tuchtrecht.overheid.nl</a> · <a href="https://accountantskamer.nl" target="_blank">accountantskamer.nl</a> · Data-extractie: maart 2026</p>
+</div>
+</div>
+
+<script>
+// ============================================================
+// EXPANDED DATABASE — 75 uitspraken with detailed features
+// ============================================================
+const D=[
+{e:1,d:"2025-01-10",z:"24/2448",b:"Gegrond",m:"Berisping",o:"Kantoortoetsing/kwaliteitssysteem",k:"NBA",v:"Schreuder",t:"RA",dur:null,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Van Rens","Brink-van der Meer","Verdiesen AA","Homminga AA"],sec:"Van de Beld",kamer:5},
+{e:2,d:"2025-01-10",z:"24/1160",b:"Ongegrond",m:null,o:"Controle jaarrekening",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. J.F. Garvelink",advK:null,panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:3,d:"2025-01-10",z:"24/2414",b:"Deels gegrond",m:"Waarschuwing",o:"Samenstellen jaarrekening/foutherstel",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. J.F. Garvelink",advK:null,panel:["Schreuder","Groenewegen","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Terwal",kamer:5},
+{e:4,d:"2025-01-10",z:"24/1235",b:"Ongegrond",m:null,o:"Controle jaarrekening",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. A.B. Schoonbeek",advK:"mr. S. Tuinenga",panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:5,d:"2025-01-20",z:"24/1869",b:"Deels gegrond",m:"Tijdelijke doorhaling",o:"Samenstellen jaarrekening",k:"NBA",v:"Schreuder",t:"AA",dur:6,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Lycklama à Nijeholt","Van der Stroom","Homminga AA","Ter Harmsel"],sec:"Van de Beld",kamer:5},
+{e:6,d:"2025-01-24",z:"24/2415",b:"Ongegrond",m:null,o:"Retentierecht/overname",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Van de Beld",kamer:3},
+{e:7,d:"2025-01-24",z:"24/2884",b:"Deels gegrond",m:"Waarschuwing",o:"Bindend advies",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. C. Okkerse",advK:null,panel:["De Haan","Van der Stroom","Van den Bragt RA AA"],sec:"Terwal",kamer:3},
+{e:8,d:"2025-01-24",z:"24/2621",b:"Ongegrond",m:null,o:"Partijrapport/memorandum",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. W.F. Hendriksen",advK:"mr. M. de Vries",panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:9,d:"2025-01-24",z:"24/2571",b:"Gegrond",m:"Tijdelijke doorhaling",o:"Kantoortoetsing/kwaliteitssysteem",k:"NBA",v:"De Haan",t:"AA",dur:6,advB:null,advK:"mr. M. Feenstra",panel:["De Haan","Van der Stroom","Homminga AA"],sec:"Van de Beld",kamer:3},
+{e:10,d:"2025-01-31",z:"24/3084",b:"Gegrond",m:"Berisping",o:"Kantoortoetsing/medewerking",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Groenewegen","Verdiesen AA"],sec:"Terwal",kamer:3},
+{e:11,d:"2025-01-31",z:"24/3024",b:"Gegrond",m:"Doorhaling",o:"Kantoortoetsing/kennistoets",k:"NBA",v:"Schreuder",t:"AA",dur:60,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Van Rens","Brink-van der Meer","Verdiesen AA","Homminga AA"],sec:"Van de Beld",kamer:5},
+{e:12,d:"2025-01-31",z:"23/1890",b:"Deels gegrond",m:"Tijdelijke doorhaling",o:"Integriteit/communicatie",k:"Particulier",v:"Schreuder",t:"AA",dur:2,advB:null,advK:null,panel:["Schreuder","Groenewegen","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Terwal",kamer:5},
+{e:13,d:"2025-02-07",z:"24/665",b:"Deels gegrond",m:"Waarschuwing",o:"Financieel toezicht/onderzoeksrapport",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. A.E. Goossens",advK:"mr. L.J. Graafhuis",panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:14,d:"2025-02-14",z:"24/2206",b:"Ongegrond",m:null,o:"Controle jaarrekening",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. H.J. Blaisse",advK:null,panel:["De Haan","Van Amsterdam","Verkade RA"],sec:"Van de Beld",kamer:3},
+{e:15,d:"2025-02-14",z:"24/2207",b:"Niet-ontvankelijk",m:null,o:"Klachttermijn",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:null,advK:null,panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Terwal",kamer:3},
+{e:16,d:"2025-02-28",z:"24/3305",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:17,d:"2025-02-28",z:"24/3306",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:18,d:"2025-02-28",z:"24/3307",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:19,d:"2025-03-07",z:"24/1868",b:"Ongegrond",m:null,o:"Due diligence/advies",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. A.E. Goossens",advK:"mr. S. Tuinenga",panel:["Schreuder","Groenewegen","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Terwal",kamer:5},
+{e:20,d:"2025-03-07",z:"24/2813",b:"Ongegrond",m:null,o:"Samenstellen jaarrekening",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Terwal",kamer:3},
+{e:21,d:"2025-03-14",z:"24/3308",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:22,d:"2025-04-11",z:"24/3513",b:"Gegrond",m:"Doorhaling",o:"Integriteit/herstructurering/rapport",k:"Particulier",v:"Schreuder",t:"RA",dur:60,advB:"mr. A.E. Goossens",advK:"mr. S. Tuinenga",panel:["Schreuder","Groenewegen","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Terwal",kamer:5},
+{e:23,d:"2025-04-11",z:"24/3309",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:24,d:"2025-04-11",z:"24/3310",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:25,d:"2025-04-11",z:"24/3592",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:26,d:"2025-04-11",z:"24/3593",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:27,d:"2025-04-11",z:"24/3600",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:28,d:"2025-04-11",z:"24/3601",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:29,d:"2025-04-11",z:"24/3602",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:30,d:"2025-04-11",z:"24/3603",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:31,d:"2025-04-17",z:"24/3590",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:32,d:"2025-04-17",z:"24/3594",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:33,d:"2025-04-17",z:"24/3595",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:34,d:"2025-04-17",z:"24/3596",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:35,d:"2025-04-17",z:"24/3597",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:36,d:"2025-04-17",z:"24/3598",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:37,d:"2025-04-17",z:"24/3599",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:38,d:"2025-04-17",z:"24/3604",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:39,d:"2025-04-17",z:"24/3605",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:40,d:"2025-04-17",z:"24/3606",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:41,d:"2025-04-17",z:"24/3607",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:42,d:"2025-04-17",z:"24/3591",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:43,d:"2025-05-19",z:"24/3311",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:44,d:"2025-05-19",z:"24/3312",b:"Gegrond",m:"Tijdelijke doorhaling",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"AA",dur:3,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:45,d:"2025-05-19",z:"24/3313",b:"Gegrond",m:"Berisping",o:"PE-verplichtingen",k:"NBA",v:"Schreuder",t:"RA",dur:null,advB:null,advK:"mr. M. Feenstra",panel:["Schreuder","Lycklama à Nijeholt","Van den Bragt RA AA"],sec:"Van de Beld",kamer:3},
+{e:46,d:"2025-05-19",z:"24/3904",b:"Ongegrond",m:null,o:"Bindend advies",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. H.J. Blaisse",advK:null,panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:47,d:"2025-06-16",z:"24/3093",b:"Deels gegrond",m:"Tijdelijke doorhaling",o:"Integriteit/objectiviteit/samenstellen",k:"Particulier",v:"De Haan",t:"AA",dur:3,advB:null,advK:null,panel:["De Haan","Van Amsterdam","Van der Stroom","Hetebrij RA","Ter Harmsel"],sec:"Van de Beld",kamer:5},
+{e:48,d:"2025-05-19",z:"24/3914",b:"Ongegrond",m:null,o:"Controle jaarrekening NBA",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. R. Crince le Roy",advK:null,panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:49,d:"2025-06-16",z:"25/85",b:"Ongegrond",m:null,o:"Controle jaarrekening",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. W.F. Hendriksen",advK:null,panel:["De Haan","Van Amsterdam","Verkade RA"],sec:"Van de Beld",kamer:3},
+{e:50,d:"2025-06-20",z:"25/105",b:"Niet-ontvankelijk",m:null,o:"Klachttermijn",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:null,advK:null,panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Terwal",kamer:3},
+{e:51,d:"2025-06-20",z:"25/120",b:"Ongegrond",m:null,o:"Samenstellen jaarrekening",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder","Lycklama à Nijeholt","Verdiesen AA"],sec:"Van de Beld",kamer:3},
+{e:52,d:"2025-07-04",z:"25/150",b:"Deels gegrond",m:"Waarschuwing",o:"Advisering/waardering",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. C. Okkerse",advK:null,panel:["De Haan","Van der Stroom","Van den Bragt RA AA"],sec:"Terwal",kamer:3},
+{e:53,d:"2025-07-04",z:"25/160",b:"Ongegrond",m:null,o:"Controle jaarrekening",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. H.J. Blaisse",advK:"mr. D. van Duijn",panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:54,d:"2025-07-04",z:"25/170",b:"Gegrond",m:"Berisping",o:"Kantoortoetsing/kwaliteitssysteem",k:"NBA",v:"Schreuder",t:"AA",dur:null,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Terwal",kamer:3},
+{e:55,d:"2025-08-15",z:"25/180",b:"Ongegrond",m:null,o:"Partijrapport",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. A.E. Goossens",advK:null,panel:["De Haan","Van Amsterdam","Van der Stroom","Verkade RA","Ter Harmsel"],sec:"Van de Beld",kamer:5},
+{e:56,d:"2025-08-15",z:"25/190",b:"Gegrond",m:"Tijdelijke doorhaling",o:"Kantoortoetsing/kwaliteitssysteem",k:"NBA",v:"Schreuder",t:"AA",dur:6,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Van Rens","Verdiesen AA"],sec:"Van de Beld",kamer:3},
+{e:57,d:"2025-09-05",z:"24/4273",b:"Deels gegrond",m:"Tijdelijke doorhaling",o:"Persoonsgericht onderzoek/hoor en wederhoor",k:"Particulier",v:"De Haan",t:"RA",dur:6,advB:"mr. W.F. Hendriksen",advK:"mr. D. van Duijn",panel:["De Haan","Van Amsterdam","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Van de Beld",kamer:5},
+{e:58,d:"2025-09-05",z:"25/166",b:"Gegrond",m:"Tijdelijke doorhaling",o:"Kantoortoetsing/kwaliteitssysteem",k:"NBA",v:"De Haan",t:"RA",dur:6,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["De Haan","Van der Stroom","Homminga AA"],sec:"Van de Beld",kamer:3},
+{e:59,d:"2025-09-22",z:"25/587",b:"Gegrond",m:"Tijdelijke doorhaling",o:"Kantoortoetsing/kwaliteitssysteem",k:"NBA",v:"Schreuder",t:"AA",dur:12,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Groenewegen","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Terwal",kamer:5},
+{e:60,d:"2025-09-22",z:"24/4266",b:"Deels gegrond",m:"Waarschuwing",o:"Nevenfunctie/stichting",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. A.E. Goossens",advK:null,panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:61,d:"2025-09-22",z:"24/2784",b:"Ongegrond",m:null,o:"Schadeberekening/partijrapport",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. C. Okkerse",advK:null,panel:["De Haan","Van Amsterdam","Van der Stroom","Verkade RA","Ter Harmsel"],sec:"Van de Beld",kamer:5},
+{e:62,d:"2025-10-07",z:"25/2135",b:"Niet-ontvankelijk",m:null,o:"Niet ingeschreven als accountant",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Terwal",kamer:3},
+{e:63,d:"2025-10-07",z:"25/2136",b:"Deels gegrond",m:"Waarschuwing",o:"Samenstellen jaarrekening",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Terwal",kamer:3},
+{e:64,d:"2025-10-07",z:"25/1778",b:"Kennelijk ongegrond",m:null,o:"Klokkenluider/bestuur",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:null,advK:null,panel:["Schreuder"],sec:"Terwal",kamer:1},
+{e:65,d:"2025-10-20",z:"25/1086",b:"Niet-ontvankelijk",m:null,o:"Accountantstitel/ziekte",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder","Lycklama à Nijeholt","Verdiesen AA"],sec:"Van de Beld",kamer:3},
+{e:66,d:"2025-10-20",z:"25/1519",b:"Kennelijk ongegrond",m:null,o:"Onvoldoende onderbouwing",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder"],sec:"Terwal",kamer:1},
+{e:67,d:"2025-10-31",z:"24/4366",b:"Deels gegrond",m:"Waarschuwing",o:"Adviesdiensten/overname",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. J.F. Garvelink",advK:null,panel:["Schreuder","Groenewegen","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Terwal",kamer:5},
+{e:68,d:"2025-11-03",z:"25/2046",b:"Kennelijk ongegrond",m:null,o:"Onvoldoende onderbouwing",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:null,advK:null,panel:["Schreuder"],sec:"Terwal",kamer:1},
+{e:69,d:"2025-11-10",z:"25/262",b:"Ongegrond",m:null,o:"Quality assurance review/IIA",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. A.B. Schoonbeek",advK:null,panel:["De Haan","Van Amsterdam","Verkade RA"],sec:"Van de Beld",kamer:3},
+{e:70,d:"2025-11-10",z:"24/3896",b:"Tussenbeslissing",m:null,o:"Verschoningsrecht",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. A.E. Goossens",advK:null,panel:["Schreuder","Bartels","Volker","Van Splunter RA","Backhuijs RA"],sec:"Van de Beld",kamer:5},
+{e:71,d:"2025-11-17",z:"25/207",b:"Ongegrond",m:null,o:"Partijdeskundigenbericht/EBITDA",k:"Particulier",v:"De Haan",t:"RA",dur:null,advB:"mr. H.J. Blaisse",advK:null,panel:["De Haan","Van Amsterdam","Van der Stroom","Verkade RA","Ter Harmsel"],sec:"Van de Beld",kamer:5},
+{e:72,d:"2025-12-01",z:"25/64",b:"Ongegrond",m:null,o:"IB-aangiften/privacy",k:"Particulier",v:"Schreuder",t:"AA",dur:null,advB:null,advK:null,panel:["Schreuder","Groenewegen","Homminga AA"],sec:"Terwal",kamer:3},
+{e:73,d:"2025-12-01",z:"25/831",b:"Gegrond",m:"Tijdelijke doorhaling",o:"Kantoortoetsing/kwaliteitssysteem",k:"NBA",v:"Schreuder",t:"AA",dur:12,advB:null,advK:"mr. I.C.E. Oosthoek-Spierings",panel:["Schreuder","Groenewegen","Van der Stroom","Hetebrij RA","Verkade RA"],sec:"Terwal",kamer:5},
+{e:74,d:"2025-12-19",z:"25/2412",b:"Kennelijk ongegrond",m:null,o:"Verantwoordelijkheid belastingadviseur",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:null,advK:null,panel:["Schreuder"],sec:"Terwal",kamer:1},
+{e:75,d:"2025-12-22",z:"25/55",b:"Niet-ontvankelijk",m:null,o:"Misbruik klachtrecht",k:"Particulier",v:"Schreuder",t:"RA",dur:null,advB:"mr. A.E. Goossens",advK:"mr. drs. [A]",panel:["Schreuder","Groenewegen","Van der Wösten RA"],sec:"Van der Weij",kamer:3}
+];
+
+// ============================================================
+// FUNDAMENTELE BEGINSELEN per uitspraak (VGBA art. 2)
+// V=Vakbekwaamheid & zorgvuldigheid, I=Integriteit, O=Objectiviteit, P=Professionaliteit, G=Vertrouwelijkheid
+// ============================================================
+const BG_MAP={
+  1:["V"],3:["V"],5:["V"],7:["V"],9:["V"],10:["V"],11:["V"],
+  12:["V","I"],13:["V"],
+  16:["V"],17:["V"],18:["V"],21:["V"],
+  22:["I","P"],23:["V"],24:["V"],25:["V"],26:["V"],27:["V"],28:["V"],29:["V"],30:["V"],
+  31:["V"],32:["V"],33:["V"],34:["V"],35:["V"],36:["V"],37:["V"],38:["V"],39:["V"],40:["V"],41:["V"],42:["V"],
+  43:["V"],44:["V"],45:["V"],
+  47:["I","O","V"],
+  52:["V"],54:["V"],56:["V"],
+  57:["V"],58:["V"],59:["V"],60:["V"],
+  63:["V"],67:["V"],73:["V"]
+};
+const BG_LABELS={"V":"Vakbekwaamheid en zorgvuldigheid","I":"Integriteit","O":"Objectiviteit","P":"Professionaliteit","G":"Vertrouwelijkheid"};
+const BG_COLORS={"V":"#2563eb","I":"#dc2626","O":"#d97706","P":"#7c3aed","G":"#0d9488"};
+D.forEach(u=>{ u.bg=BG_MAP[u.e]||[]; });
+
+// ============================================================
+// HELPER FUNCTIONS
+// ============================================================
+const MN=["Jan","Feb","Mrt","Apr","Mei","Jun","Jul","Aug","Sep","Okt","Nov","Dec"];
+const C=["#1e3a5f","#dc2626","#0d9488","#d97706","#7c3aed","#ea580c","#16a34a","#be185d","#2563eb","#64748b"];
+function count(arr,fn){const m={};arr.forEach(x=>{const k=fn(x);m[k]=(m[k]||0)+1});return m}
+function sorted(obj){return Object.entries(obj).sort((a,b)=>b[1]-a[1])}
+function bCls(b){if(b==="Gegrond")return"b-gg";if(b==="Deels gegrond")return"b-dg";if(b==="Ongegrond")return"b-og";if(b.includes("Niet-ontvankelijk"))return"b-no";if(b.includes("Kennelijk"))return"b-ko";return"b-ov"}
+
+// Drilldown
+function openDrill(title,html){document.getElementById("ddContent").innerHTML=`<div class="dd-title">${title}</div>${html}`;document.getElementById("ddOverlay").classList.add("show")}
+function closeDrill(){document.getElementById("ddOverlay").classList.remove("show")}
+function drillZaken(items,title){
+  let h=`<p style="font-size:11px;color:#64748b;margin-bottom:12px">Klik op een rij voor details · klik op 🔗 om de uitspraak te openen op tuchtrecht.overheid.nl</p>`;
+  h+=`<table style="font-size:12px;width:100%"><thead><tr style="background:#1e293b;color:#fff"><th style="padding:9px 12px">ECLI</th><th style="padding:9px 12px">Datum</th><th style="padding:9px 12px">Beslissing</th><th style="padding:9px 12px">Maatregel</th><th style="padding:9px 12px">Onderwerp</th><th style="padding:9px 12px;width:36px"></th></tr></thead><tbody>`;
+  items.forEach((u,i)=>{
+    h+=`<tr style="cursor:pointer;border-bottom:1px solid #f1f5f9;${i%2?'background:#f8fafc':''}" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='${i%2?'#f8fafc':''}'" onclick="closeDrill();setTimeout(()=>openDetail(${u.e}),100)">`;
+    h+=`<td style="padding:9px 12px;font-weight:700;color:#1e3a5f">${u.e}</td>`;
+    h+=`<td style="padding:9px 12px">${u.d}</td>`;
+    h+=`<td style="padding:9px 12px"><span class="b ${bCls(u.b)}">${u.b}</span></td>`;
+    h+=`<td style="padding:9px 12px">${u.m?(u.m+(u.dur?' ('+u.dur+'m)':'')):'—'}</td>`;
+    h+=`<td style="padding:9px 12px;font-size:11px">${u.o}</td>`;
+    h+=`<td style="padding:9px 12px;text-align:center" onclick="event.stopPropagation();window.open('https://tuchtrecht.overheid.nl/zoeken/resultaat/uitspraak/2025/ECLI_NL_TACAKN_2025_${u.e}','_blank')"><span style="cursor:pointer;font-size:16px" title="Open uitspraak op tuchtrecht.overheid.nl">🔗</span></td>`;
+    h+=`</tr>`;
+  });
+  h+="</tbody></table>";openDrill(title,h)
+}
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function showTab(id,btn){
+  document.querySelectorAll(".tp").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".nv button").forEach(b=>b.classList.remove("on"));
+  document.getElementById("tab-"+id).classList.add("on");
+  if(btn)btn.classList.add("on");
+}
+
+// ============================================================
+// COMPUTED DATA
+// ============================================================
+const perMaand=MN.map((_,i)=>D.filter(u=>new Date(u.d).getMonth()===i).length);
+const gg=D.filter(u=>u.b==="Gegrond"||u.b==="Deels gegrond").length;
+const og=D.filter(u=>u.b==="Ongegrond").length;
+const no=D.filter(u=>u.b.includes("Niet-ontvankelijk")||u.b.includes("Kennelijk")||u.b==="Tussenbeslissing").length;
+const nba=D.filter(u=>u.k==="NBA").length;
+const ra=D.filter(u=>u.t==="RA").length;
+const aa=D.filter(u=>u.t==="AA").length;
+const pe=D.filter(u=>u.o.includes("PE-")).length;
+const metAdv=D.filter(u=>u.advB).length;
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function mkStat(l,v,s,fn){return`<div class="sc" style="cursor:pointer" onclick="${fn}"><div class="sl">${l}</div><div class="sv">${v}</div><div class="ss">${s}</div><div style="font-size:9px;color:#475569;margin-top:4px;opacity:.7">▶ klik voor details</div></div>`}
+document.getElementById("statsRow1").innerHTML=
+  mkStat("Totaal uitspraken","75","ECLI 2025:1–75","drillZaken(D,'Alle 75 uitspraken 2025')")+
+  mkStat("(Deels) gegrond",gg,Math.round(gg/75*100)+"% van klachten","drillZaken(D.filter(u=>u.b==='Gegrond'||u.b==='Deels gegrond'),'(Deels) gegronde klachten ("+gg+")')")+
+  mkStat("Ongegrond",og,Math.round(og/75*100)+"% van klachten","drillZaken(D.filter(u=>u.b==='Ongegrond'),'Ongegronde klachten ("+og+")')")+
+  mkStat("Niet-ontv./overig",no,"Incl. kennelijk ongegrond","drillZaken(D.filter(u=>u.b!=='Gegrond'&&u.b!=='Deels gegrond'&&u.b!=='Ongegrond'&&u.b!=='Tussenbeslissing'),'Niet-ontvankelijk / kennelijk ongegrond ("+no+")')");
+document.getElementById("statsRow2").innerHTML=
+  mkStat("NBA-klachten",nba,Math.round(nba/75*100)+"% door beroepsorganisatie","drillZaken(D.filter(u=>u.k==='NBA'),'NBA-klachten ("+nba+")')")+
+  mkStat("RA / AA",ra+" / "+aa,"Register- vs. administratieconsulent","drillRAvsAA()")+
+  mkStat("PE-zaken",pe,"Permanente educatie","drillZaken(D.filter(u=>u.o.includes('PE-')),'PE-verplichtingszaken ("+pe+")')")+
+  mkStat("Met advocaat",metAdv,Math.round(metAdv/75*100)+"% betrokkenen met advocaat","drillZaken(D.filter(u=>u.advB),'Zaken met advocaat betrokkene ("+metAdv+")')");
+
+function drillRAvsAA(){
+  const raList=D.filter(u=>u.t==='RA');
+  const aaList=D.filter(u=>u.t==='AA');
+  let h='<div style="display:flex;gap:16px;margin-bottom:16px">';
+  h+='<div style="flex:1;background:#dbeafe;border-radius:10px;padding:16px;text-align:center"><div style="font-size:32px;font-weight:800;color:#1d4ed8">'+ra+'</div><div style="font-size:13px;font-weight:600;color:#1e40af">Registeraccountants (RA)</div></div>';
+  h+='<div style="flex:1;background:#fef9c3;border-radius:10px;padding:16px;text-align:center"><div style="font-size:32px;font-weight:800;color:#a16207">'+aa+'</div><div style="font-size:13px;font-weight:600;color:#92400e">Accountant-administratieconsulenten (AA)</div></div>';
+  h+='</div>';
+  h+='<div style="display:flex;gap:12px;margin-bottom:16px">';
+  h+='<button onclick="closeDrill();drillZaken(D.filter(u=>u.t===\'RA\'),\'RA-zaken ('+ra+')\')" style="flex:1;padding:10px;background:#1d4ed8;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px">Bekijk alle RA-zaken</button>';
+  h+='<button onclick="closeDrill();drillZaken(D.filter(u=>u.t===\'AA\'),\'AA-zaken ('+aa+')\')" style="flex:1;padding:10px;background:#a16207;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px">Bekijk alle AA-zaken</button>';
+  h+='</div>';
+  // Vergelijking
+  const raGG=D.filter(u=>u.t==='RA'&&(u.b==='Gegrond'||u.b==='Deels gegrond')).length;
+  const aaGG=D.filter(u=>u.t==='AA'&&(u.b==='Gegrond'||u.b==='Deels gegrond')).length;
+  const raM=D.filter(u=>u.t==='RA'&&u.m).length;
+  const aaM=D.filter(u=>u.t==='AA'&&u.m).length;
+  h+='<table style="width:100%;font-size:12px;border-collapse:collapse"><thead><tr style="background:#0f172a;color:#fff"><th style="padding:8px 12px;text-align:left">Vergelijking</th><th style="padding:8px 12px;text-align:center">RA</th><th style="padding:8px 12px;text-align:center">AA</th></tr></thead><tbody>';
+  h+='<tr style="border-bottom:1px solid #e2e8f0"><td style="padding:8px 12px">Totaal zaken</td><td style="padding:8px 12px;text-align:center;font-weight:700">'+ra+'</td><td style="padding:8px 12px;text-align:center;font-weight:700">'+aa+'</td></tr>';
+  h+='<tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc"><td style="padding:8px 12px">(Deels) gegrond</td><td style="padding:8px 12px;text-align:center">'+raGG+' ('+Math.round(raGG/ra*100)+'%)</td><td style="padding:8px 12px;text-align:center">'+aaGG+' ('+Math.round(aaGG/aa*100)+'%)</td></tr>';
+  h+='<tr style="border-bottom:1px solid #e2e8f0"><td style="padding:8px 12px">Maatregel opgelegd</td><td style="padding:8px 12px;text-align:center">'+raM+'</td><td style="padding:8px 12px;text-align:center">'+aaM+'</td></tr>';
+  h+='<tr style="background:#f8fafc"><td style="padding:8px 12px">NBA als klager</td><td style="padding:8px 12px;text-align:center">'+D.filter(u=>u.t==='RA'&&u.k==='NBA').length+'</td><td style="padding:8px 12px;text-align:center">'+D.filter(u=>u.t==='AA'&&u.k==='NBA').length+'</td></tr>';
+  h+='</tbody></table>';
+  openDrill('RA vs. AA — Vergelijking 2025',h);
+}
+
+// Maand chart with click drill
+const chMaand=new Chart(document.getElementById("cMaand"),{
+  type:"bar",data:{labels:MN,datasets:[{label:"Uitspraken",data:perMaand,backgroundColor:"#1e3a5f",borderRadius:5,hoverBackgroundColor:"#dc2626"}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:5}}},onClick(evt,els){
+    if(els.length){const mi=els[0].index;const items=D.filter(u=>new Date(u.d).getMonth()===mi);drillZaken(items,`Uitspraken ${MN[mi]} 2025 (${items.length})`)}
+  }}
+});
+
+// Beslissing donut with click
+const besM=count(D,u=>u.b);const besE=sorted(besM);
+const chBesl=new Chart(document.getElementById("cBesl"),{
+  type:"doughnut",data:{labels:besE.map(e=>e[0]),datasets:[{data:besE.map(e=>e[1]),backgroundColor:C.slice(0,besE.length),borderWidth:2,borderColor:"#fff"}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{font:{size:11}}}},onClick(evt,els){
+    if(els.length){const l=besE[els[0].index][0];const items=D.filter(u=>u.b===l);drillZaken(items,`Beslissing: ${l} (${items.length})`)}
+  }}
+});
+
+// Type donut
+const typeLabels=["RA","AA"];
+new Chart(document.getElementById("cType"),{
+  type:"doughnut",data:{labels:typeLabels,datasets:[{data:[ra,aa],backgroundColor:["#2563eb","#d97706"],borderWidth:2,borderColor:"#fff"}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{font:{size:11}}}},onClick(evt,els){
+    if(els.length){const t=typeLabels[els[0].index];drillZaken(D.filter(u=>u.t===t),t==='RA'?'Registeraccountants ('+ra+')':'Accountant-administratieconsulenten ('+aa+')')}
+  }}
+});
+
+// Voorzitters
+const vzM=count(D,u=>u.v);
+document.getElementById("vzRow").innerHTML=sorted(vzM).map((v,i)=>{
+  const full=v[0]==="Schreuder"?"mr. A.A.A.M. Schreuder":"mr. C.H. de Haan";
+  const role=v[0]==="Schreuder"?"Voorzitter":"Plv. voorzitter";
+  return`<div style="flex:1;text-align:center;border-radius:12px;padding:24px;${i===0?'background:#0f172a;color:#fff':'background:#f1f5f9;color:#1e293b'};cursor:pointer" onclick="drillZaken(D.filter(u=>u.v==='${v[0]}'),'Zaken voorzitter ${full} (${v[1]})')">
+    <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700">${v[1]}</div>
+    <div style="font-size:14px;font-weight:600">${full}</div><div style="font-size:12px;opacity:.6">${role} — klik voor zaken</div></div>`
+}).join("");
+
+// Timeline
+const highlights=[
+  {e:11,txt:"Doorhaling 5 jaar — weigering medewerking kantoortoetsing + kennistoets niet afgerond"},
+  {e:12,txt:"Tijdelijke doorhaling 2 mnd — accountant drong aan op ondertekening valse verklaring voor voorzieningenrechter"},
+  {e:22,txt:"Doorhaling — bewust herstructurering geadviseerd om verhaal schuldeiser onmogelijk te maken"},
+  {e:57,txt:"Tijdelijke doorhaling 6 mnd — persoonsgericht onderzoek zonder toepassing hoor en wederhoor"},
+  {e:59,txt:"Tijdelijke doorhaling 12 mnd — kwaliteitssysteem sinds 2018 onvoldoende, verbeterplan niet uitgevoerd"},
+  {e:73,txt:"Tijdelijke doorhaling 12 mnd — hertoetsing negatief, bevindingen grotendeels erkend door betrokkene"},
+  {e:75,txt:"Niet-ontvankelijk — herindiening ingetrokken klacht als misbruik van klachtrecht aangemerkt"}
+];
+document.getElementById("timeline").innerHTML=highlights.map(h=>{
+  const u=D.find(x=>x.e===h.e);
+  return`<div class="tl-item" onclick="drillZaken([D.find(x=>x.e===${h.e})],'ECLI:NL:TACAKN:2025:${h.e}')">
+    <div class="tl-date">${u.d} · ECLI ${h.e} · ${u.m||u.b}</div><div class="tl-desc">${h.txt}</div></div>`
+}).join("");
+
+// ============================================================
+// MAATREGELEN
+// ============================================================
+const maaM=count(D.filter(u=>u.m),u=>u.m);const maaE=sorted(maaM);
+const chMaat=new Chart(document.getElementById("cMaat"),{
+  type:"bar",data:{labels:maaE.map(e=>e[0]),datasets:[{label:"Aantal",data:maaE.map(e=>e[1]),backgroundColor:["#dc2626","#d97706","#1e3a5f","#0d9488"],borderRadius:3,barThickness:18,hoverBackgroundColor:"#7c3aed"}]},
+  options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:10}}},y:{ticks:{font:{size:11}}}},onClick(evt,els){
+    if(els.length){const l=maaE[els[0].index][0];drillZaken(D.filter(u=>u.m===l),`Maatregel: ${l} (${maaM[l]})`)}
+  }}
+});
+
+// Duur
+const duurM=count(D.filter(u=>u.m==="Tijdelijke doorhaling"&&u.dur),u=>u.dur+" mnd");
+const duurE=Object.entries(duurM).sort((a,b)=>parseInt(a[0])-parseInt(b[0]));
+new Chart(document.getElementById("cDuur"),{
+  type:"bar",data:{labels:duurE.map(e=>e[0]),datasets:[{label:"Aantal",data:duurE.map(e=>e[1]),backgroundColor:"#0d9488",borderRadius:5,hoverBackgroundColor:"#dc2626"}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:2}}},onClick(evt,els){
+    if(els.length){const lbl=duurE[els[0].index][0];const mnd=parseInt(lbl);drillZaken(D.filter(u=>u.m==="Tijdelijke doorhaling"&&u.dur===mnd),'Tijdelijke doorhaling '+lbl+' ('+duurM[lbl]+' zaken)')}
+  }}
+});
+
+// Per kwartaal
+const kwartData=[1,2,3,4].map(q=>{const items=D.filter(u=>u.m&&Math.ceil((new Date(u.d).getMonth()+1)/3)===q);return{q:"Q"+q,ber:items.filter(i=>i.m==="Berisping").length,wrs:items.filter(i=>i.m==="Waarschuwing").length,td:items.filter(i=>i.m==="Tijdelijke doorhaling").length,dh:items.filter(i=>i.m==="Doorhaling").length}});
+new Chart(document.getElementById("cKwart"),{
+  type:"bar",data:{labels:kwartData.map(q=>q.q),datasets:[
+    {label:"Berisping",data:kwartData.map(q=>q.ber),backgroundColor:"#d97706",borderRadius:3},
+    {label:"Waarschuwing",data:kwartData.map(q=>q.wrs),backgroundColor:"#0d9488",borderRadius:3},
+    {label:"Tijdelijke doorhaling",data:kwartData.map(q=>q.td),backgroundColor:"#dc2626",borderRadius:3},
+    {label:"Doorhaling",data:kwartData.map(q=>q.dh),backgroundColor:"#1e3a5f",borderRadius:3}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{font:{size:10}}}},scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}},onClick(evt,els){
+    if(els.length){const qi=els[0].index+1;const items=D.filter(u=>u.m&&Math.ceil((new Date(u.d).getMonth()+1)/3)===qi);drillZaken(items,'Maatregelen Q'+qi+' 2025 ('+items.length+')')}
+  }}
+});
+
+// Zwaarste tabel
+const zwaar=D.filter(u=>u.m==="Doorhaling"||(u.m==="Tijdelijke doorhaling"&&u.dur>=6)).sort((a,b)=>(b.dur||0)-(a.dur||0));
+let zt=`<table><thead><tr><th>ECLI</th><th>Datum</th><th>Maatregel</th><th>Onderwerp</th><th>Advocaat betr.</th><th>Kamer</th></tr></thead><tbody>`;
+zwaar.forEach(u=>{zt+=`<tr class="clickable" onclick="drillZaken([D.find(x=>x.e===${u.e})],'ECLI ${u.e}')"><td style="font-weight:700">2025:${u.e}</td><td>${u.d}</td><td><span class="b b-m">${u.m}${u.dur?' '+u.dur+' mnd':''}</span></td><td style="font-size:11px">${u.o}</td><td style="font-size:11px">${u.advB||'Geen'}</td><td>${u.kamer}-kops</td></tr>`});
+zt+="</tbody></table>";document.getElementById("tblZwaar").innerHTML=zt;
+
+// ============================================================
+// ONDERWERPEN
+// ============================================================
+function catOf(o){if(o.includes("PE-"))return"PE-verplichtingen";if(o.includes("Kantoortoetsing"))return"Kantoortoetsing/kwaliteit";if(o.includes("jaarrekening")||o.includes("Samenstellen"))return"Jaarrekening/samenstellen";if(o.includes("Controle"))return"Controle jaarrekening";if(o.includes("rapport")||o.includes("onderzoek"))return"Rapport/onderzoek";if(o.includes("advies")||o.includes("Advies")||o.includes("Bindend"))return"Advies/bindend advies";if(o.includes("Integriteit"))return"Integriteit";return"Overig"}
+const catM=count(D,u=>catOf(u.o));const catE=sorted(catM);
+const chOnd=new Chart(document.getElementById("cOnd"),{
+  type:"bar",data:{labels:catE.map(e=>e[0]),datasets:[{label:"Zaken",data:catE.map(e=>e[1]),backgroundColor:"#7c3aed",borderRadius:3,barThickness:14,hoverBackgroundColor:"#dc2626"}]},
+  options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:10}}},y:{ticks:{font:{size:10}}}},onClick(evt,els){
+    if(els.length){const c=catE[els[0].index][0];drillZaken(D.filter(u=>catOf(u.o)===c),`${c} (${catM[c]} zaken)`)}
+  }}
+});
+
+// Klager chart
+const klM=count(D,u=>u.k);const klE=sorted(klM);
+new Chart(document.getElementById("cKlager"),{
+  type:"doughnut",data:{labels:klE.map(e=>e[0]),datasets:[{data:klE.map(e=>e[1]),backgroundColor:["#1e3a5f","#d97706","#0d9488"],borderWidth:2,borderColor:"#fff"}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},onClick(evt,els){
+    if(els.length){const k=klE[els[0].index][0];drillZaken(D.filter(u=>u.k===k),'Klager: '+k+' ('+klM[k]+' zaken)')}
+  }}
+});
+document.getElementById("klagerDetails").innerHTML=`
+  <div class="ic blue" onclick="drillZaken(D.filter(u=>u.k==='NBA'),'NBA-klachten (${nba})')"><h3>NBA — ${nba} klachten</h3><p>De Koninklijke Nederlandse Beroepsorganisatie van Accountants diende het merendeel van de klachten in, met name over PE-verplichtingen (ca. 30 zaken) en kantoortoetsingen. NBA wordt bijgestaan door mr. Oosthoek-Spierings en mr. Feenstra.</p></div>
+  <div class="ic amber" onclick="drillZaken(D.filter(u=>u.k==='Particulier'),'Klachten particulieren (${75-nba})')"><h3>Particulieren — ${75-nba} klachten</h3><p>Particuliere klagers zijn o.a. cliënten, wederpartijen in geschillen, curatoren. Zij klagen over rapportages, jaarrekeningen, integriteit. Circa ${metAdv} betrokkenen schakelden een advocaat in.</p></div>`;
+
+// Thema cards
+// Fundamentele beginselen chart
+const bgCount={};
+D.forEach(u=>u.bg.forEach(b=>{bgCount[b]=(bgCount[b]||0)+1}));
+const bgE=Object.entries(bgCount).sort((a,b)=>b[1]-a[1]);
+new Chart(document.getElementById("cBG"),{
+  type:"bar",data:{labels:bgE.map(e=>BG_LABELS[e[0]]),datasets:[{label:"Zaken",data:bgE.map(e=>e[1]),backgroundColor:bgE.map(e=>BG_COLORS[e[0]]),borderRadius:3,barThickness:20,hoverBackgroundColor:"#0f172a"}]},
+  options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{font:{size:10}}},y:{ticks:{font:{size:10}}}},onClick(evt,els){
+    if(els.length){const code=bgE[els[0].index][0];drillZaken(D.filter(u=>u.bg.includes(code)),BG_LABELS[code]+' ('+bgCount[code]+' zaken)')}
+  }}
+});
+
+// Beginselen details
+const bgTotal=D.filter(u=>u.bg.length>0).length;
+const bgMulti=D.filter(u=>u.bg.length>1).length;
+document.getElementById("bgDetails").innerHTML=`
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div class="ic blue" onclick="drillZaken(D.filter(u=>u.bg.includes('V')),'Vakbekwaamheid en zorgvuldigheid (${bgCount.V||0} zaken)')">
+      <h3 style="font-size:14px">Vakbekwaamheid en zorgvuldigheid</h3>
+      <p><strong>${bgCount.V||0} zaken</strong> — Verreweg het meest geschonden beginsel. Omvat PE-verzuim, tekortschietende kwaliteitssystemen, onzorgvuldige jaarrekeningen en rapporten zonder deugdelijke grondslag.</p>
+    </div>
+    <div class="ic red" onclick="drillZaken(D.filter(u=>u.bg.includes('I')),'Integriteit (${bgCount.I||0} zaken)')">
+      <h3 style="font-size:14px">Integriteit</h3>
+      <p><strong>${bgCount.I||0} zaken</strong> — Herstructurering om verhaal te frustreren (ECLI 22), valse verklaring laten tekenen (ECLI 12), niet-integer handelen niet beëindigd (ECLI 47).</p>
+    </div>
+    <div class="ic amber" onclick="drillZaken(D.filter(u=>u.bg.includes('O')),'Objectiviteit (${bgCount.O||0} zaken)')">
+      <h3 style="font-size:14px">Objectiviteit</h3>
+      <p><strong>${bgCount.O||0} zaken</strong> — Tegelijkertijd optreden als accountant en adviseur van één aandeelhouder zonder de bedreiging weg te nemen (ECLI 47).</p>
+    </div>
+    <div class="ic purple" onclick="drillZaken(D.filter(u=>u.bg.includes('P')),'Professionaliteit (${bgCount.P||0} zaken)')">
+      <h3 style="font-size:14px">Professionaliteit</h3>
+      <p><strong>${bgCount.P||0} zaken</strong> — Accountantsberoep in diskrediet gebracht door frauduleus advies (ECLI 22).</p>
+    </div>
+    <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:10px;padding:14px">
+      <p style="font-size:12px;color:#0f766e"><strong>Vertrouwelijkheid: 0 zaken in 2025.</strong> In ${bgMulti} zaken werden meerdere beginselen tegelijk geschonden. Totaal ${bgTotal} van 75 uitspraken bevatten een schending.</p>
+    </div>
+  </div>`;
+
+document.getElementById("themaCards").innerHTML=`
+<div class="ic red" onclick="drillZaken(D.filter(u=>u.o.includes('PE-')),'PE-verplichtingszaken (${pe})')"><h3>🔴 PE-golf (${pe} zaken)</h3><p>NBA diende in okt 2024 tegen 30 accountants klachten in wegens niet-nakomen PE-verplichtingen 2023. Resultaat: berispingen (1e keer) en doorhalingen 3 mnd (recidive). Alle behandeld door kleine kamer Schreuder/Lycklama/Van den Bragt.</p><div style="font-size:10px;color:#991b1b;margin-top:6px;font-weight:600">▶ Bekijk alle ${pe} zaken</div></div>
+<div class="ic blue" onclick="drillZaken(D.filter(u=>u.o.includes('Kantoortoetsing')),'Kantoortoetsingszaken (${D.filter(u=>u.o.includes("Kantoortoetsing")).length})')"><h3>🔵 Kantoortoetsingen (${D.filter(u=>u.o.includes("Kantoortoetsing")).length} zaken)</h3><p>Kwaliteitssystemen van kleine kantoren ("eenpitters") voldoen niet. Hertoetsingen leveren vaak opnieuw negatief resultaat. Doorhalingen tot 5 jaar + geldboete bij weigering medewerking.</p><div style="font-size:10px;color:#1d4ed8;margin-top:6px;font-weight:600">▶ Bekijk alle kantoortoetsingszaken</div></div>
+<div class="ic green" onclick="drillZaken(D.filter(u=>u.o.includes('onderzoek')||u.o.includes('rapport')||u.o.includes('Partij')),'Rapport- en onderzoekszaken')"><h3>🟢 Hoor en wederhoor</h3><p>Bij persoonsgerichte onderzoeken is hoor en wederhoor essentieel voor deugdelijke grondslag. Bij schadeberekeningen en partijrapporten is het een middel, geen doel op zich. Handreiking 1112 vs. 1127 is cruciaal onderscheid.</p><div style="font-size:10px;color:#166534;margin-top:6px;font-weight:600">▶ Bekijk rapport/onderzoekszaken</div></div>
+<div class="ic purple" onclick="drillZaken(D.filter(u=>u.o.includes('Integriteit')),'Integriteitszaken')"><h3>🟣 Integriteit</h3><p>Zwaarste sanctie: doorhaling voor accountant die herstructurering adviseerde om verhaal te frustreren (ECLI 22). Ook: accountant die valse verklaring wilde laten tekenen (ECLI 12). Integriteit-schendingen leiden tot zware maatregelen.</p><div style="font-size:10px;color:#6b21a8;margin-top:6px;font-weight:600">▶ Bekijk integriteitszaken</div></div>
+<div class="ic amber" onclick="drillZaken(D.filter(u=>u.o.includes('advies')||u.o.includes('Advies')||u.o.includes('Bindend')),'Advies/bindend advieszaken')"><h3>🟡 Bindend advies</h3><p>Bij bindend advies past terughoudende toetsing vanwege de aard van de opdracht (geschilbeslechting). De accountant heeft beoordelingsruimte. Klager moet aantonen dat steken zijn gevallen.</p><div style="font-size:10px;color:#92400e;margin-top:6px;font-weight:600">▶ Bekijk advieszaken</div></div>
+<div class="ic teal" onclick="drillZaken([D.find(u=>u.e===75)],'ECLI 75 — Misbruik klachtrecht')"><h3>🔷 Misbruik klachtrecht</h3><p>ECLI 75: eerder ingetrokken klacht (onderdeel schikking) opnieuw ingediend. Accountantskamer oordeelt: misbruik klachtrecht. Betrokkene mocht gerechtvaardigd vertrouwen ontlenen aan intrekking.</p><div style="font-size:10px;color:#0f766e;margin-top:6px;font-weight:600">▶ Bekijk deze uitspraak</div></div>`;
+
+// ============================================================
+// PERSONEN
+// ============================================================
+// Advocaten betrokkenen
+const advBM=count(D.filter(u=>u.advB),u=>u.advB);const advBE=sorted(advBM);const advBMx=advBE.length?advBE[0][1]:1;
+document.getElementById("advBetrokken").innerHTML=advBE.map((v,i)=>
+  `<div class="rank-item" onclick="drillZaken(D.filter(u=>u.advB==='${v[0].replace(/'/g,"\\'")}'),'${v[0]} (${v[1]} zaken)')">
+    <div class="rank-num">${i+1}</div><div class="rank-info"><div class="rank-name">${v[0]}</div><div class="rank-sub">${v[1]} zaken als advocaat betrokkene</div>
+    <div class="rank-bar"><div class="rank-bar-fill" style="width:${Math.round(v[1]/advBMx*100)}%;background:#dc2626"></div></div></div></div>`).join("");
+
+// Advocaten klagers
+const advKM=count(D.filter(u=>u.advK),u=>u.advK);const advKE=sorted(advKM);const advKMx=advKE.length?advKE[0][1]:1;
+document.getElementById("advKlager").innerHTML=advKE.map((v,i)=>
+  `<div class="rank-item" onclick="drillZaken(D.filter(u=>u.advK==='${v[0].replace(/'/g,"\\'")}'),'${v[0]} (${v[1]} zaken)')">
+    <div class="rank-num">${i+1}</div><div class="rank-info"><div class="rank-name">${v[0]}</div><div class="rank-sub">${v[1]} zaken als advocaat/gemachtigde klager</div>
+    <div class="rank-bar"><div class="rank-bar-fill" style="width:${Math.round(v[1]/advKMx*100)}%;background:#2563eb"></div></div></div></div>`).join("");
+
+// Secretarissen
+const secM=count(D,u=>u.sec);const secE=sorted(secM);const secMx=secE.length?secE[0][1]:1;
+document.getElementById("secretarissen").innerHTML=secE.map((v,i)=>{
+  const full=v[0]==="Van de Beld"?"E.N.M. van de Beld":v[0]==="Terwal"?"C.J.H. Terwal":"A. van der Weij";
+  return`<div class="rank-item" onclick="drillZaken(D.filter(u=>u.sec==='${v[0]}'),'Secretaris mr. ${full} (${v[1]} zaken)')"><div class="rank-num">${i+1}</div><div class="rank-info"><div class="rank-name">mr. ${full}</div><div class="rank-sub">${v[1]} zaken</div>
+    <div class="rank-bar"><div class="rank-bar-fill" style="width:${Math.round(v[1]/secMx*100)}%;background:#0d9488"></div></div></div></div>`}).join("");
+
+// ============================================================
+// KAMERSAMENSTELLING
+// ============================================================
+const kamM=count(D,u=>u.kamer===5?"Grote kamer (5)":u.kamer===3?"Kleine kamer (3)":"Voorzittersbeslissing (1)");
+const kamE=sorted(kamM);
+new Chart(document.getElementById("cKamer"),{
+  type:"doughnut",data:{labels:kamE.map(e=>e[0]),datasets:[{data:kamE.map(e=>e[1]),backgroundColor:["#1e3a5f","#d97706","#0d9488"],borderWidth:2,borderColor:"#fff"}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},onClick(evt,els){
+    if(els.length){const lbl=kamE[els[0].index][0];const num=parseInt(lbl.match(/\d/)[0]);drillZaken(D.filter(u=>u.kamer===num),lbl+' ('+kamE[els[0].index][1]+' zaken)')}
+  }}
+});
+document.getElementById("kamerStats").innerHTML=kamE.map(k=>{const num=k[0].match(/\d/)[0];return`<div class="sc" style="cursor:pointer" onclick="drillZaken(D.filter(u=>u.kamer===${num}),'${k[0]} (${k[1]} zaken)')"><div class="sl">${k[0]}</div><div class="sv">${k[1]}</div><div class="ss">Klik voor zaken</div></div>`}).join("");
+
+// Rechterlijke leden
+const allRL=[];D.forEach(u=>u.panel.forEach(p=>{if(!p.includes("RA")&&!p.includes("AA")&&p!==u.v)allRL.push({name:p,ecli:u.e})}));
+const rlM=count(allRL,x=>x.name);const rlE=sorted(rlM);const rlMx=rlE.length?rlE[0][1]:1;
+document.getElementById("rechters").innerHTML=rlE.map((v,i)=>
+  `<div class="rank-item" onclick="drillZaken(D.filter(u=>u.panel.includes('${v[0]}')),'mr. ${v[0]} (${v[1]} zaken)')">
+    <div class="rank-num">${i+1}</div><div class="rank-info"><div class="rank-name">mr. ${v[0]}</div><div class="rank-sub">${v[1]} zaken als rechterlijk lid</div>
+    <div class="rank-bar"><div class="rank-bar-fill" style="width:${Math.round(v[1]/rlMx*100)}%;background:#1e3a5f"></div></div></div></div>`).join("");
+
+// Accountantsleden
+const allAL=[];D.forEach(u=>u.panel.forEach(p=>{if(p.includes("RA")||p.includes("AA"))allAL.push({name:p,ecli:u.e})}));
+const alM=count(allAL,x=>x.name);const alE=sorted(alM);const alMx=alE.length?alE[0][1]:1;
+document.getElementById("accLeden").innerHTML=alE.map((v,i)=>
+  `<div class="rank-item" onclick="drillZaken(D.filter(u=>u.panel.includes('${v[0]}')),'${v[0]} (${v[1]} zaken)')">
+    <div class="rank-num">${i+1}</div><div class="rank-info"><div class="rank-name">${v[0]}</div><div class="rank-sub">${v[1]} zaken als accountantslid</div>
+    <div class="rank-bar"><div class="rank-bar-fill" style="width:${Math.round(v[1]/alMx*100)}%;background:#7c3aed"></div></div></div></div>`).join("");
+
+// ============================================================
+// DATABASE with search & filter
+// ============================================================
+let dbSort="e",dbDir=1;
+function renderDB(){
+  const q=(document.getElementById("dbSearch").value||"").toLowerCase();
+  const fb=document.getElementById("dbFilter").value;
+  const fk=document.getElementById("dbKlager").value;
+  let items=D.filter(u=>{
+    if(fb&&!u.b.includes(fb))return false;
+    if(fk&&u.k!==fk)return false;
+    if(q){const hay=[u.o,u.advB||'',u.advK||'',u.panel.join(' '),u.z,u.sec,u.k,u.b,u.m||'',u.bg.map(b=>BG_LABELS[b]).join(' ')].join(' ').toLowerCase();if(!hay.includes(q))return false}
+    return true;
+  });
+  items.sort((a,b)=>{
+    if(dbSort==="e")return(a.e-b.e)*dbDir;
+    if(dbSort==="d")return(new Date(a.d)-new Date(b.d))*dbDir;
+    if(dbSort==="b")return a.b.localeCompare(b.b)*dbDir;
+    if(dbSort==="k")return(a.kamer-b.kamer)*dbDir;
+    return 0;
+  });
+  document.getElementById("dbCounter").textContent=`${items.length} van 75 uitspraken`;
+  const ar=c=>dbSort===c?(dbDir===1?" ▲":" ▼"):"";
+  let h=`<table><thead><tr>
+    <th class="so" onclick="dbSortBy('e')">ECLI${ar('e')}</th>
+    <th class="so" onclick="dbSortBy('d')">Datum${ar('d')}</th>
+    <th>Zaak</th>
+    <th class="so" onclick="dbSortBy('b')">Beslissing${ar('b')}</th>
+    <th>Maatregel</th>
+    <th>Beginselen</th>
+    <th>Onderwerp</th>
+    <th>Klager</th>
+    <th>Adv. betr.</th>
+    <th>Adv. klager</th>
+    <th class="so" onclick="dbSortBy('k')">Kamer${ar('k')}</th>
+    <th>Panel</th>
+  </tr></thead><tbody>`;
+  items.forEach(u=>{
+    h+=`<tr class="clickable" onclick="openDetail(${u.e})">
+      <td style="font-weight:700;color:#1e3a5f">${u.e}</td>
+      <td>${u.d}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px">${u.z}</td>
+      <td><span class="b ${bCls(u.b)}">${u.b}</span></td>
+      <td style="font-size:10px">${u.m?(u.m+(u.dur?' ('+u.dur+'m)':'')):'<span style="color:#cbd5e0">—</span>'}</td>
+      <td style="font-size:9px">${u.bg.length?u.bg.map(b=>'<span class="b" style="background:'+BG_COLORS[b]+';color:#fff;margin-right:2px">'+b+'</span>').join(''):'<span style="color:#cbd5e0">—</span>'}</td>
+      <td style="font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis">${u.o}</td>
+      <td><span class="b ${u.k==='NBA'?'b-gg':'b-dg'}">${u.k}</span></td>
+      <td style="font-size:10px">${u.advB||'<span style="color:#cbd5e0">—</span>'}</td>
+      <td style="font-size:10px">${u.advK||'<span style="color:#cbd5e0">—</span>'}</td>
+      <td style="text-align:center">${u.kamer}</td>
+      <td style="font-size:9px;max-width:200px;overflow:hidden;text-overflow:ellipsis">${u.panel.join(', ')}</td>
+    </tr>`;
+  });
+  h+="</tbody></table>";document.getElementById("tblDB").innerHTML=h;
+}
+function dbSortBy(c){if(dbSort===c)dbDir*=-1;else{dbSort=c;dbDir=1}renderDB()}
+
+function openDetail(ecli){
+  const u=D.find(x=>x.e===ecli);if(!u)return;
+  let h=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13px">
+    <div><strong>ECLI</strong><br>ECLI:NL:TACAKN:2025:${u.e}</div>
+    <div><strong>Datum</strong><br>${u.d}</div>
+    <div><strong>Zaaknummer</strong><br>${u.z} Wtra AK</div>
+    <div><strong>Beslissing</strong><br><span class="b ${bCls(u.b)}">${u.b}</span></div>
+    <div><strong>Maatregel</strong><br>${u.m?(u.m+(u.dur?' ('+u.dur+' maanden)':'')):'Geen'}</div>
+    <div><strong>Type accountant</strong><br><span class="b ${u.t==='RA'?'b-ra':'b-aa'}">${u.t}</span></div>
+    <div><strong>Klager</strong><br>${u.k}</div>
+    <div><strong>Voorzitter</strong><br>mr. ${u.v==='Schreuder'?'A.A.A.M. Schreuder':'C.H. de Haan'}</div>
+    <div><strong>Advocaat betrokkene</strong><br>${u.advB||'Geen / zelf verschenen'}</div>
+    <div><strong>Advocaat klager</strong><br>${u.advK||'Geen / zelf verschenen'}</div>
+    <div style="grid-column:1/-1"><strong>Kamersamenstelling (${u.kamer}-kops)</strong><br>${u.panel.join(' · ')}</div>
+    <div><strong>Secretaris</strong><br>mr. ${u.sec==='Van de Beld'?'E.N.M. van de Beld':u.sec==='Terwal'?'C.J.H. Terwal':'A. van der Weij'}</div>
+    <div style="grid-column:1/-1"><strong>Onderwerp</strong><br>${u.o}</div>
+    <div style="grid-column:1/-1"><strong>Geschonden fundamentele beginselen</strong><br>${u.bg.length?u.bg.map(b=>'<span class="b" style="background:'+BG_COLORS[b]+';color:#fff;margin-right:4px;padding:3px 10px">'+BG_LABELS[b]+'</span>').join(''):'<span style="color:#94a3b8">Geen (klacht ongegrond / niet-ontvankelijk)</span>'}</div>
+    <div style="grid-column:1/-1"><a href="https://tuchtrecht.overheid.nl/zoeken/resultaat/uitspraak/2025/ECLI_NL_TACAKN_2025_${u.e}" target="_blank" style="color:#2563eb;font-weight:600">→ Bekijk volledige uitspraak op tuchtrecht.overheid.nl</a></div>
+  </div>`;
+  openDrill(`ECLI:NL:TACAKN:2025:${u.e}`,h);
+}
+
+renderDB();
+</script>
+</body>
+</html>
